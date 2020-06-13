@@ -1,47 +1,48 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import { Container, Header, Title, Body, Content, Item, Input, Icon, Button, Toast, Text } from "native-base";
-import Colors from "./view/constant/colors";
-import Styles from "./view/styles/style";
-import { default as InputCustom } from "./component/Input";
-import Activities from "./pages/activities";
+/* eslint-disable react-native/no-inline-styles */
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { get } from "./helper/LocalStorageHelper";
 
-export default () => {
-    return <Activities />;
+// Pages
+import Splash from "./pages/Splash";
+import Home from "./pages/Home";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+// import Profile from "./pages/Profile";
 
-    const [username, setUsername] = useState("username");
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
+const Stack = createStackNavigator();
 
-    const callback = value => {
-        console.log(value);
-        setFirstname(value.firstname);
-        setLastname(value.lastname);
-    };
+const AppNavigator = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        get("token").then(val => {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
+            if (val === null) return;
+            setIsLoggedIn(true);
+        });
+    }, [isLoggedIn]);
 
     return (
-        <Container>
-            <Header androidStatusBarColor={Colors.VANADYL_BLUE} style={{ backgroundColor: Colors.VANADYL_BLUE }}>
-                <Body>
-                    <Title>React Native</Title>
-                </Body>
-            </Header>
-            <Content style={Styles.content}>
-                <InputCustom callback={callback} />
-                <Button
-                    rounded
-                    block
-                    onPress={() => {
-                        alert(`Hello ${username}, how are you?`);
-                    }}>
-                    <Text style={{ color: Colors.WHITE }}>LOGIN</Text>
-                </Button>
-
-                <View style={{ marginTop: 20 }}>
-                    <Text style={{ textAlign: "center" }}>{firstname}</Text>
-                    <Text style={{ textAlign: "center" }}>{lastname}</Text>
-                </View>
-            </Content>
-        </Container>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="LandingPage"
+                    component={isLoading ? Splash : isLoggedIn ? Home : Landing}
+                    options={{
+                        headerShown: isLoggedIn ? true : false,
+                        title: isLoggedIn ? "Lotte Mart" : "",
+                    }}
+                />
+                <Stack.Screen name="HomePage" component={Home} options={{ title: "Lotte Mart" }} />
+                <Stack.Screen name="LoginPage" component={Login} options={{ headerShown: false }} />
+                <Stack.Screen name="RegisterPage" component={Register} options={{ headerShown: false }} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 };
+export default AppNavigator;

@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
         paddingRight: 6,
         marginBottom: 20,
     },
+    inputNoPadding: {
+        marginBottom: 20,
+    },
 });
 
 export default styles;

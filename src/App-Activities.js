@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Container, Header, Title, Body, Content, Icon, Button, Fab, Left } from "native-base";
-import ActivityList from "../component/ActivityList";
-import NewActivityForm from "../component/NewActivityForm";
-import Colors from "../view/constant/colors";
-import Styles from "../view/styles/style";
+import ActivityList from "./component/ActivityList";
+import NewActivityForm from "./component/NewActivityForm";
+import Colors from "./view/constant/colors";
+import Styles from "./view/styles/style";
 
 export default () => {
     const [addNew, setAddNew] = useState(false);
