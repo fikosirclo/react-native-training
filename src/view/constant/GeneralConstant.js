@@ -1,0 +1,4 @@
+export default {
+    SET_CATEGORY_ID: "[GENERAL] SET_CATEGORY_ID",
+    SET_PRODUCT_ID: "[GENERAL] SET_PRODUCT_ID",
+};

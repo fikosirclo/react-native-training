@@ -10,3 +10,7 @@ Task to create 3 pages (landing page, login, and homepage)
 
 ## Home Page
 ![Home Page](https://i.ibb.co/3hKVrvd/image.png)
+
+### What I've used?
+
+- [react-native-image-slider-box](https://www.npmjs.com/package/react-native-image-slider-box)

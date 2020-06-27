@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Image, ImageBackground, View, StatusBar, Text, TouchableOpacity } from "react-native";
 import { Button, Text as TextBase } from "native-base";
-import { get } from "../../helper/LocalStorageHelper";
 
 export default ({ navigation }) => {
     return (

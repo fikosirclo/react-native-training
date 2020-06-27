@@ -6,7 +6,7 @@ import Hr from "../../component/Hr";
 import style from "./style";
 import Colors from "../../view/constant/colors";
 import { mutate } from "../../services/graphql/api";
-import { get, set } from "../../helper/LocalStorageHelper";
+import LocalStorageHelper from "../../helper/LocalStorageHelper";
 
 export default ({ navigation }) => {
     const [isLoginLoading, setIsLoginLoading] = useState(false);
@@ -33,7 +33,7 @@ export default ({ navigation }) => {
                 setUsername("");
                 setPassword("");
                 setIsLoginLoading(false);
-                set("token", user.token);
+                LocalStorageHelper.set("token", user.token);
                 navigation.reset({
                     index: 0,
                     routes: [{ name: "HomePage" }],

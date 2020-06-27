@@ -6,15 +6,17 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-export const query = schema => {
+export const query = (schema, extra = {}) => {
     return client.query({
         query: schema,
+        ...extra,
     });
 };
 
-export const mutate = (schema, data) => {
+export const mutate = (schema, data, extra = {}) => {
     return client.mutate({
         variables: data,
         mutation: schema,
+        ...extra,
     });
 };
